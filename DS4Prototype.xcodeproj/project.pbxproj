@@ -12,7 +12,40 @@
 		B2A86D6E226A25220028C34A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2A86D6C226A25220028C34A /* Main.storyboard */; };
 		B2A86D70226A25230028C34A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2A86D6F226A25230028C34A /* Assets.xcassets */; };
 		B2A86D73226A25230028C34A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2A86D71226A25230028C34A /* LaunchScreen.storyboard */; };
+		B2A86DBF226C52800028C34A /* IOSDS4.h in Headers */ = {isa = PBXBuildFile; fileRef = B2A86DBD226C52800028C34A /* IOSDS4.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B2A86DC2226C52800028C34A /* IOSDS4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A86DBB226C52800028C34A /* IOSDS4.framework */; };
+		B2A86DC3226C52800028C34A /* IOSDS4.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2A86DBB226C52800028C34A /* IOSDS4.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B2A86DC8226C52880028C34A /* DS4Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A86DB4226C521C0028C34A /* DS4Controller.m */; };
+		B2A86DC9226C529E0028C34A /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A86DA6226A398F0028C34A /* IOKit.framework */; };
+		B2A86DCA226C52A00028C34A /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A86D8A226A29C50028C34A /* GameController.framework */; };
+		B2A86DCF226C56B60028C34A /* UnofficialController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A86DCD226C56B60028C34A /* UnofficialController.m */; };
+		B2A86DD1226C62760028C34A /* DS4Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = B2A86DB3226C521C0028C34A /* DS4Controller.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B2A86DD2226C62760028C34A /* UnofficialController.h in Headers */ = {isa = PBXBuildFile; fileRef = B2A86DCC226C56B60028C34A /* UnofficialController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B2A86DC0226C52800028C34A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2A86D5D226A25220028C34A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2A86DBA226C52800028C34A;
+			remoteInfo = IOSDS4;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B2A86DC7226C52800028C34A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B2A86DC3226C52800028C34A /* IOSDS4.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B2A86D65226A25220028C34A /* DS4Prototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DS4Prototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +55,15 @@
 		B2A86D6F226A25230028C34A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2A86D72226A25230028C34A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B2A86D74226A25230028C34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2A86D8A226A29C50028C34A /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
+		B2A86DA6226A398F0028C34A /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = ../iPhoneOS.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		B2A86DB3226C521C0028C34A /* DS4Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DS4Controller.h; sourceTree = "<group>"; };
+		B2A86DB4226C521C0028C34A /* DS4Controller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DS4Controller.m; sourceTree = "<group>"; };
+		B2A86DBB226C52800028C34A /* IOSDS4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IOSDS4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2A86DBD226C52800028C34A /* IOSDS4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOSDS4.h; sourceTree = "<group>"; };
+		B2A86DBE226C52800028C34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2A86DCC226C56B60028C34A /* UnofficialController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnofficialController.h; sourceTree = "<group>"; };
+		B2A86DCD226C56B60028C34A /* UnofficialController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnofficialController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +71,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A86DC2226C52800028C34A /* IOSDS4.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2A86DB8226C52800028C34A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2A86DC9226C529E0028C34A /* IOKit.framework in Frameworks */,
+				B2A86DCA226C52A00028C34A /* GameController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,7 +91,9 @@
 			isa = PBXGroup;
 			children = (
 				B2A86D67226A25220028C34A /* DS4Prototype */,
+				B2A86DBC226C52800028C34A /* IOSDS4 */,
 				B2A86D66226A25220028C34A /* Products */,
+				B2A86D7C226A26790028C34A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -47,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				B2A86D65226A25220028C34A /* DS4Prototype.app */,
+				B2A86DBB226C52800028C34A /* IOSDS4.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,7 +119,42 @@
 			path = DS4Prototype;
 			sourceTree = "<group>";
 		};
+		B2A86D7C226A26790028C34A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B2A86DA6226A398F0028C34A /* IOKit.framework */,
+				B2A86D8A226A29C50028C34A /* GameController.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B2A86DBC226C52800028C34A /* IOSDS4 */ = {
+			isa = PBXGroup;
+			children = (
+				B2A86DBD226C52800028C34A /* IOSDS4.h */,
+				B2A86DB3226C521C0028C34A /* DS4Controller.h */,
+				B2A86DB4226C521C0028C34A /* DS4Controller.m */,
+				B2A86DCC226C56B60028C34A /* UnofficialController.h */,
+				B2A86DCD226C56B60028C34A /* UnofficialController.m */,
+				B2A86DBE226C52800028C34A /* Info.plist */,
+			);
+			path = IOSDS4;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B2A86DB6226C52800028C34A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2A86DD1226C62760028C34A /* DS4Controller.h in Headers */,
+				B2A86DBF226C52800028C34A /* IOSDS4.h in Headers */,
+				B2A86DD2226C62760028C34A /* UnofficialController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		B2A86D64226A25220028C34A /* DS4Prototype */ = {
@@ -74,15 +164,36 @@
 				B2A86D61226A25220028C34A /* Sources */,
 				B2A86D62226A25220028C34A /* Frameworks */,
 				B2A86D63226A25220028C34A /* Resources */,
+				B2A86DC7226C52800028C34A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B2A86DC1226C52800028C34A /* PBXTargetDependency */,
 			);
 			name = DS4Prototype;
 			productName = DS4Prototype;
 			productReference = B2A86D65226A25220028C34A /* DS4Prototype.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B2A86DBA226C52800028C34A /* IOSDS4 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2A86DC4226C52800028C34A /* Build configuration list for PBXNativeTarget "IOSDS4" */;
+			buildPhases = (
+				B2A86DCB226C52BB0028C34A /* Symlink IOKit headers */,
+				B2A86DB6226C52800028C34A /* Headers */,
+				B2A86DB7226C52800028C34A /* Sources */,
+				B2A86DB8226C52800028C34A /* Frameworks */,
+				B2A86DB9226C52800028C34A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IOSDS4;
+			productName = IOSDS4;
+			productReference = B2A86DBB226C52800028C34A /* IOSDS4.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -95,6 +206,10 @@
 				ORGANIZATIONNAME = "Mahdi Bchatnia";
 				TargetAttributes = {
 					B2A86D64226A25220028C34A = {
+						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
+					};
+					B2A86DBA226C52800028C34A = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
 				};
@@ -113,6 +228,7 @@
 			projectRoot = "";
 			targets = (
 				B2A86D64226A25220028C34A /* DS4Prototype */,
+				B2A86DBA226C52800028C34A /* IOSDS4 */,
 			);
 		};
 /* End PBXProject section */
@@ -128,7 +244,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2A86DB9226C52800028C34A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B2A86DCB226C52BB0028C34A /* Symlink IOKit headers */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Symlink IOKit headers";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -x\nset -e\n\nDESTPATH=\"$PROJECT_DIR/IOSDS4/include\"\nMACOSSDK=\"$PLATFORM_DIR/../MacOSX.platform/Developer/SDKs/MacOSX.sdk\"\n\nif [ ! -e \"$DESTPATH/IOKit\" ]; then\nln -s \"$MACOSSDK/System/Library/Frameworks/IOKit.framework/Headers\" \"$DESTPATH/IOKit\"\nfi\n\nif [ ! -e \"$DESTPATH/libkern\" ]; then\nmkdir -p \"$DESTPATH/libkern\"\nln -s \"$MACOSSDK/usr/include/libkern/OSTypes.h\" \"$DESTPATH/libkern/OSTypes.h\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B2A86D61226A25220028C34A /* Sources */ = {
@@ -140,7 +284,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2A86DB7226C52800028C34A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2A86DC8226C52880028C34A /* DS4Controller.m in Sources */,
+				B2A86DCF226C56B60028C34A /* UnofficialController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B2A86DC1226C52800028C34A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2A86DBA226C52800028C34A /* IOSDS4 */;
+			targetProxy = B2A86DC0226C52800028C34A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B2A86D6C226A25220028C34A /* Main.storyboard */ = {
@@ -282,15 +443,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP5UYHJQCD;
 				INFOPLIST_FILE = DS4Prototype/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.mahdi.DS4Prototype;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -300,9 +464,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP5UYHJQCD;
 				INFOPLIST_FILE = DS4Prototype/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -311,6 +477,72 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B2A86DC5226C52800028C34A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PP5UYHJQCD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/../iPhoneOS.sdk/System/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/IOSDS4/include";
+				INFOPLIST_FILE = IOSDS4/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.mahdi.IOSDS4;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B2A86DC6226C52800028C34A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PP5UYHJQCD;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/../iPhoneOS.sdk/System/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/IOSDS4/include";
+				INFOPLIST_FILE = IOSDS4/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.mahdi.IOSDS4;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -331,6 +563,15 @@
 			buildConfigurations = (
 				B2A86D78226A25230028C34A /* Debug */,
 				B2A86D79226A25230028C34A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2A86DC4226C52800028C34A /* Build configuration list for PBXNativeTarget "IOSDS4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2A86DC5226C52800028C34A /* Debug */,
+				B2A86DC6226C52800028C34A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
