@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GCExtendedGamepad (Additions)
 
-- (void)applyValues:(GCExtendedGamepadSnapshotData)snapshotData;
+- (void)applyValues:(GCExtendedGamepadSnapShotDataV100)snapshotData;
 
 @end
 

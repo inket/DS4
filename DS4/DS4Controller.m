@@ -14,7 +14,7 @@ static IOHIDManagerRef HIDManager = nil;
 static NSMutableArray *ps4Controllers = nil;
 
 @implementation DS4Controller {
-    GCExtendedGamepadSnapshotData _snapshot;
+    GCExtendedGamepadSnapShotDataV100 _snapshot;
 
     CFIndex _lThumbXUsageID;
     CFIndex _lThumbYUsageID;
@@ -90,7 +90,7 @@ static NSMutableArray *ps4Controllers = nil;
         _extendedGamepad = [[GCExtendedGamepadSnapshot alloc] init];
 
         _snapshot.version = 0x0100;
-        _snapshot.size = sizeof(GCExtendedGamepadSnapshotData);
+        _snapshot.size = sizeof(GCExtendedGamepadSnapShotDataV100);
     }
 
     return self;
@@ -189,7 +189,7 @@ static void input(void *context, IOReturn result, void *sender, IOHIDValueRef va
 
     @autoreleasepool {
         DS4Controller *controller = (__bridge DS4Controller *)context;
-        GCExtendedGamepadSnapshotData *snapshot = &controller->_snapshot;
+        GCExtendedGamepadSnapShotDataV100 *snapshot = &controller->_snapshot;
 
         IOHIDElementRef element = IOHIDValueGetElement(value);
 
@@ -242,14 +242,14 @@ static void input(void *context, IOReturn result, void *sender, IOHIDValueRef va
         }
 
         snapshot->version = 0x0100;
-        snapshot->size = sizeof(GCExtendedGamepadSnapshotData);
+        snapshot->size = sizeof(GCExtendedGamepadSnapShotDataV100);
 
         updateSnapshot(controller);
     }
 }
 
 static void updateSnapshot(DS4Controller *controller) {
-    GCExtendedGamepadSnapshotData *extendedSnapshot = &controller->_snapshot;
+    GCExtendedGamepadSnapShotDataV100 *extendedSnapshot = &controller->_snapshot;
 
     [controller.extendedGamepad applyValues:*extendedSnapshot];
 
@@ -259,7 +259,7 @@ static void updateSnapshot(DS4Controller *controller) {
 
 #pragma mark - Gamepad
 
-static NSData *V100SnapshotDataFromGCExtendedSnapshotData(GCExtendedGamepadSnapshotData *snapshot) {
+static NSData *V100SnapshotDataFromGCExtendedSnapshotData(GCExtendedGamepadSnapShotDataV100 *snapshot) {
     GCGamepadSnapShotDataV100 v100 = (GCGamepadSnapShotDataV100){
         .version = 0x0100,
         .size = sizeof(GCGamepadSnapShotDataV100),
@@ -282,7 +282,7 @@ static NSData *V100SnapshotDataFromGCExtendedSnapshotData(GCExtendedGamepadSnaps
 
 @implementation GCExtendedGamepad (Additions)
 
-- (void)applyValues:(GCExtendedGamepadSnapshotData)snapshot {
+- (void)applyValues:(GCExtendedGamepadSnapShotDataV100)snapshot {
     if ([self.dpad.xAxis ds4_setValue:snapshot.dpadX] ||
         [self.dpad.yAxis ds4_setValue:snapshot.dpadY]) {
         self.valueChangedHandler(self, self.dpad);
