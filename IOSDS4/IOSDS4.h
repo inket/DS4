@@ -16,5 +16,5 @@ FOUNDATION_EXPORT const unsigned char IOSDS4VersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <IOSDS4/PublicHeader.h>
 
-#import "UnofficialController.h"
-#import "DS4Controller.h"
+#import <IOSDS4/UnofficialController.h>
+#import <IOSDS4/DS4Controller.h>

@@ -14,11 +14,7 @@ static IOHIDManagerRef HIDManager = nil;
 static NSMutableArray *ps4Controllers = nil;
 
 @implementation DS4Controller {
-    GCExtendedGamepadSnapShotDataV100 _snapshot;
-
-    // Gamepad ivars are lazy and are only created when requested.
-    GCGamepadSnapshot *_gamepad;
-    GCExtendedGamepadSnapshot *_extendedGamepad;
+    GCExtendedGamepadSnapshotData _snapshot;
 
     CFIndex _lThumbXUsageID;
     CFIndex _lThumbYUsageID;
@@ -45,6 +41,8 @@ static NSMutableArray *ps4Controllers = nil;
 @synthesize controllerPausedHandler = _controllerPausedHandler;
 @synthesize vendorName = _vendorName;
 @synthesize playerIndex = _playerIndex;
+@synthesize extendedGamepad = _extendedGamepad;
+@synthesize gamepad = _gamepad;
 
 + (void)listen {
     static dispatch_once_t onceToken;
@@ -86,12 +84,13 @@ static NSMutableArray *ps4Controllers = nil;
 
 - (instancetype)initWithDevice:(IOHIDDeviceRef)device {
     if (self = [super init]) {
-        NSString *manufacturer = (__bridge NSString *)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDManufacturerKey));
-        NSString *product = (__bridge NSString *)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDProductKey));
-        _vendorName = [NSString stringWithFormat:@"%@ %@", manufacturer, product];
+        _vendorName = @"Sony DualShock 4";
+
+        _gamepad = [[GCGamepadSnapshot alloc] init];
+        _extendedGamepad = [[GCExtendedGamepadSnapshot alloc] init];
 
         _snapshot.version = 0x0100;
-        _snapshot.size = sizeof(_snapshot);
+        _snapshot.size = sizeof(GCExtendedGamepadSnapshotData);
     }
 
     return self;
@@ -190,7 +189,7 @@ static void input(void *context, IOReturn result, void *sender, IOHIDValueRef va
 
     @autoreleasepool {
         DS4Controller *controller = (__bridge DS4Controller *)context;
-        GCExtendedGamepadSnapShotDataV100 *snapshot = &controller->_snapshot;
+        GCExtendedGamepadSnapshotData *snapshot = &controller->_snapshot;
 
         IOHIDElementRef element = IOHIDValueGetElement(value);
 
@@ -200,7 +199,7 @@ static void input(void *context, IOReturn result, void *sender, IOHIDValueRef va
         CFIndex state = (int)IOHIDValueGetIntegerValue(value);
         float analog = IOHIDValueGetScaledValue(value, kIOHIDValueScaleTypeCalibrated);
 
-//        snapshot->version = 100;
+//        NSLog(@"usagePage: 0x%02X, usage 0x%02X, value: %ld / %f", usagePage, usage, (long)state, analog);
 
         if (usagePage == kHIDPage_Button) {
             if (usage == controller->_buttonPauseUsageID) { if (state) controller.controllerPausedHandler(controller); }
@@ -242,36 +241,26 @@ static void input(void *context, IOReturn result, void *sender, IOHIDValueRef va
             }
         }
 
+        snapshot->version = 0x0100;
+        snapshot->size = sizeof(GCExtendedGamepadSnapshotData);
+
         updateSnapshot(controller);
     }
 }
 
 static void updateSnapshot(DS4Controller *controller) {
-    GCExtendedGamepadSnapShotDataV100 *extendedSnapshot = &controller->_snapshot;
+    GCExtendedGamepadSnapshotData *extendedSnapshot = &controller->_snapshot;
 
-    // Update the gamepad snapshots if they currently exist.
-    if (controller->_extendedGamepad) {
-        NSData *data = NSDataFromGCExtendedGamepadSnapShotDataV100(extendedSnapshot);
+    [controller.extendedGamepad applyValues:*extendedSnapshot];
 
-        if (data) {
-            controller->_extendedGamepad.snapshotData = data;
-        }
-    }
-
-    if (controller->_gamepad) {
-        GCGamepadSnapShotDataV100 snapshot = copySnapshotData(extendedSnapshot);
-        NSData *data = NSDataFromGCGamepadSnapShotDataV100(&snapshot);
-
-        if (data) {
-            controller->_gamepad.snapshotData = data;
-        }
-    }
+    NSData *downgradedSnapshotData = V100SnapshotDataFromGCExtendedSnapshotData(extendedSnapshot);
+    [(GCGamepadSnapshot *)controller.gamepad setSnapshotData:downgradedSnapshotData];
 }
 
 #pragma mark - Gamepad
 
-static GCGamepadSnapShotDataV100 copySnapshotData(GCExtendedGamepadSnapShotDataV100 *snapshot) {
-    return (GCGamepadSnapShotDataV100){
+static NSData *V100SnapshotDataFromGCExtendedSnapshotData(GCExtendedGamepadSnapshotData *snapshot) {
+    GCGamepadSnapShotDataV100 v100 = (GCGamepadSnapShotDataV100){
         .version = 0x0100,
         .size = sizeof(GCGamepadSnapShotDataV100),
         .dpadX = snapshot->dpadX,
@@ -283,27 +272,66 @@ static GCGamepadSnapShotDataV100 copySnapshotData(GCExtendedGamepadSnapShotDataV
         .leftShoulder = snapshot->leftShoulder,
         .rightShoulder = snapshot->rightShoulder,
     };
+
+    return NSDataFromGCGamepadSnapShotDataV100(&v100);
 }
 
-- (GCGamepad *)gamepad {
-    if (_gamepad == nil) {
-        _gamepad = [[GCGamepadSnapshot alloc] init];
-        GCGamepadSnapShotDataV100 snapshot = copySnapshotData(&_snapshot);
-        NSData *data = NSDataFromGCGamepadSnapShotDataV100(&snapshot);
-        if(data) _gamepad.snapshotData = data;
+@end
+
+#pragma mark - Gamepad
+
+@implementation GCExtendedGamepad (Additions)
+
+- (void)applyValues:(GCExtendedGamepadSnapshotData)snapshot {
+    if ([self.dpad.xAxis ds4_setValue:snapshot.dpadX] ||
+        [self.dpad.yAxis ds4_setValue:snapshot.dpadY]) {
+        self.valueChangedHandler(self, self.dpad);
     }
 
-    return _gamepad;
+    if ([self.leftThumbstick.xAxis ds4_setValue:snapshot.leftThumbstickX] ||
+        [self.leftThumbstick.yAxis ds4_setValue:snapshot.leftThumbstickY]) {
+        self.valueChangedHandler(self, self.leftThumbstick);
+    }
+
+    if ([self.rightThumbstick.xAxis ds4_setValue:snapshot.rightThumbstickX] ||
+        [self.rightThumbstick.yAxis ds4_setValue:snapshot.rightThumbstickY]) {
+        self.valueChangedHandler(self, self.rightThumbstick);
+    }
+
+    if ([self.buttonA ds4_setValue:snapshot.buttonA]) self.valueChangedHandler(self, self.buttonA);
+    if ([self.buttonB ds4_setValue:snapshot.buttonB]) self.valueChangedHandler(self, self.buttonB);
+    if ([self.buttonX ds4_setValue:snapshot.buttonX]) self.valueChangedHandler(self, self.buttonX);
+    if ([self.buttonY ds4_setValue:snapshot.buttonY]) self.valueChangedHandler(self, self.buttonY);
+    if ([self.leftShoulder ds4_setValue:snapshot.leftShoulder]) self.valueChangedHandler(self, self.leftShoulder);
+    if ([self.rightShoulder ds4_setValue:snapshot.rightShoulder]) self.valueChangedHandler(self, self.rightShoulder);
+    if ([self.leftTrigger ds4_setValue:snapshot.leftTrigger]) self.valueChangedHandler(self, self.leftTrigger);
+    if ([self.rightTrigger ds4_setValue:snapshot.rightTrigger]) self.valueChangedHandler(self, self.rightTrigger);
 }
 
-- (GCExtendedGamepad *)extendedGamepad {
-    if (_extendedGamepad == nil) {
-        _extendedGamepad = [[GCExtendedGamepadSnapshot alloc] init];
-        NSData *data = NSDataFromGCExtendedGamepadSnapShotDataV100(&_snapshot);
-        _extendedGamepad.snapshotData = data;
+@end
+
+@implementation GCControllerButtonInput (Additions)
+
+- (BOOL)ds4_setValue:(float)newValue {
+    if (self.value != newValue) {
+        [self _setValue:newValue];
+        return YES;
     }
 
-    return _extendedGamepad;
+    return NO;
+}
+
+@end
+
+@implementation GCControllerAxisInput (Additions)
+
+- (BOOL)ds4_setValue:(float)newValue {
+    if (self.value != newValue) {
+        [self _setValue:newValue];
+        return YES;
+    }
+
+    return NO;
 }
 
 @end

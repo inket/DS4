@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UnofficialController : GCController
 
 - (instancetype)init NS_UNAVAILABLE;
-+ (void)test;
 + (void)registerController:(GCController *)controller;
 + (void)unregisterController:(GCController *)controller;
 

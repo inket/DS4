@@ -13,7 +13,35 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface GCControllerElement (Additions)
+
+- (void)_setValue:(float)newValue;
+- (BOOL)ds4_setValue:(float)newValue;
+
+@end
+
+@interface GCControllerAxisInput (Additions)
+
+- (BOOL)ds4_setValue:(float)newValue;
+
+@end
+
+@interface GCControllerButtonInput (Additions)
+
+- (BOOL)ds4_setValue:(float)newValue;
+
+@end
+
+@interface GCExtendedGamepad (Additions)
+
+- (void)applyValues:(GCExtendedGamepadSnapshotData)snapshotData;
+
+@end
+
 @interface DS4Controller : GCController
+
+@property (nonatomic, retain, readonly) GCGamepad *gamepad;
+@property (nonatomic, retain, readonly) GCExtendedGamepad *extendedGamepad;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (void)listen;
