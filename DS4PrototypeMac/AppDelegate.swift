@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import MacDS4
+import DS4
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {

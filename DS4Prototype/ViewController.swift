@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IOSDS4
+import DS4
 
 class ViewController: UIViewController {
     let textView = UITextView()
