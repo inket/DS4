@@ -202,7 +202,9 @@ static void input(void *context, IOReturn result, void *sender, IOHIDValueRef va
 //        NSLog(@"usagePage: 0x%02X, usage 0x%02X, value: %ld / %f", usagePage, usage, (long)state, analog);
 
         if (usagePage == kHIDPage_Button) {
-            if (usage == controller->_buttonPauseUsageID) { if (state) controller.controllerPausedHandler(controller); }
+            if (usage == controller->_buttonPauseUsageID) {
+                if (state && controller.controllerPausedHandler) controller.controllerPausedHandler(controller);
+            }
             if (usage == controller->_buttonAUsageID) { snapshot->buttonA = state; }
             if (usage == controller->_buttonBUsageID) { snapshot->buttonB = state; }
             if (usage == controller->_buttonXUsageID) { snapshot->buttonX = state; }
