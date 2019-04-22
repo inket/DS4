@@ -285,27 +285,43 @@ static NSData *V100SnapshotDataFromGCExtendedSnapshotData(GCExtendedGamepadSnapS
 - (void)applyValues:(GCExtendedGamepadSnapShotDataV100)snapshot {
     if ([self.dpad.xAxis ds4_setValue:snapshot.dpadX] ||
         [self.dpad.yAxis ds4_setValue:snapshot.dpadY]) {
-        self.valueChangedHandler(self, self.dpad);
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.dpad);
     }
 
     if ([self.leftThumbstick.xAxis ds4_setValue:snapshot.leftThumbstickX] ||
         [self.leftThumbstick.yAxis ds4_setValue:snapshot.leftThumbstickY]) {
-        self.valueChangedHandler(self, self.leftThumbstick);
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.leftThumbstick);
     }
 
     if ([self.rightThumbstick.xAxis ds4_setValue:snapshot.rightThumbstickX] ||
         [self.rightThumbstick.yAxis ds4_setValue:snapshot.rightThumbstickY]) {
-        self.valueChangedHandler(self, self.rightThumbstick);
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.rightThumbstick);
     }
 
-    if ([self.buttonA ds4_setValue:snapshot.buttonA]) self.valueChangedHandler(self, self.buttonA);
-    if ([self.buttonB ds4_setValue:snapshot.buttonB]) self.valueChangedHandler(self, self.buttonB);
-    if ([self.buttonX ds4_setValue:snapshot.buttonX]) self.valueChangedHandler(self, self.buttonX);
-    if ([self.buttonY ds4_setValue:snapshot.buttonY]) self.valueChangedHandler(self, self.buttonY);
-    if ([self.leftShoulder ds4_setValue:snapshot.leftShoulder]) self.valueChangedHandler(self, self.leftShoulder);
-    if ([self.rightShoulder ds4_setValue:snapshot.rightShoulder]) self.valueChangedHandler(self, self.rightShoulder);
-    if ([self.leftTrigger ds4_setValue:snapshot.leftTrigger]) self.valueChangedHandler(self, self.leftTrigger);
-    if ([self.rightTrigger ds4_setValue:snapshot.rightTrigger]) self.valueChangedHandler(self, self.rightTrigger);
+    if ([self.buttonA ds4_setValue:snapshot.buttonA]) {
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.buttonA);
+    }
+    if ([self.buttonB ds4_setValue:snapshot.buttonB]) {
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.buttonB);
+    }
+    if ([self.buttonX ds4_setValue:snapshot.buttonX]) {
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.buttonX);
+    }
+    if ([self.buttonY ds4_setValue:snapshot.buttonY]) {
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.buttonY);
+    }
+    if ([self.leftShoulder ds4_setValue:snapshot.leftShoulder]) {
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.leftShoulder);
+    }
+    if ([self.rightShoulder ds4_setValue:snapshot.rightShoulder]) {
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.rightShoulder);
+    }
+    if ([self.leftTrigger ds4_setValue:snapshot.leftTrigger]) {
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.leftTrigger);
+    }
+    if ([self.rightTrigger ds4_setValue:snapshot.rightTrigger]) {
+        if (self.valueChangedHandler) self.valueChangedHandler(self, self.rightTrigger);
+    }
 }
 
 @end
